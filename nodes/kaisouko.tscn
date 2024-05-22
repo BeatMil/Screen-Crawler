@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://gc0ap5lfak4m"]
+
+[ext_resource type="Texture2D" uid="uid://csvhjwr7qo4pv" path="res://media/kaisouko_default_parry.png" id="1_i71mh"]
+[ext_resource type="Script" path="res://scripts/waifu.gd" id="2_t4d78"]
+
+[node name="Waifu" type="Node2D"]
+script = ExtResource("2_t4d78")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_i71mh")
+
+[node name="gon" type="Polygon2D" parent="."]
+color = Color(0.619608, 0.619608, 0.619608, 0.670588)
+polygon = PackedVector2Array(-104, -216, 120, -216, 120, 248, -104, 248)
