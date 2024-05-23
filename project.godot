@@ -13,6 +13,8 @@ config_version=5
 config/name="Screen Crawler"
 run/main_scene="res://scenes/screen.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+run/max_fps=120
+run/low_processor_mode=true
 boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
@@ -34,6 +36,7 @@ window/vsync/vsync_mode=0
 [physics]
 
 2d/run_on_separate_thread=true
+common/physics_ticks_per_second=120
 
 [rendering]
 
