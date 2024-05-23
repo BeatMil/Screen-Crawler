@@ -3,6 +3,8 @@ extends Node2D
 # See? I'm even commenting this for you. Hmph!
 
 @onready var _ClickPolygon: Polygon2D = $"gon"
+var mouse_pos: Vector2
+@onready var offset: Vector2
 
 
 # Config
@@ -16,13 +18,25 @@ func _ready():
 
 
 func _process(_delta):
+	# Debug labels
+	$MousePosLabel.text = str(mouse_pos)
+	$PosLabel.text = str(position)
+	$RandomLabel.text = str(offset)
+
+	# Get mouse pos
+	mouse_pos = get_viewport().get_mouse_position()
+
 	if is_following_mouse == true:
-		var mouse_pos = get_viewport().get_mouse_position()
-		position = mouse_pos
+		# stop getting offset when mouse is dragged
+		position = mouse_pos - offset
+	elif is_following_mouse == false:
+		# get offset when mouse is not drag
+		offset = mouse_pos - position
 
 
 func _physics_process(_delta):
 	pass
+
 	_update_polygon_position()
 
 
