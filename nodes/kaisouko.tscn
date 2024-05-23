@@ -1,19 +1,96 @@
-[gd_scene load_steps=3 format=3 uid="uid://gc0ap5lfak4m"]
+[gd_scene load_steps=8 format=3 uid="uid://gc0ap5lfak4m"]
 
-[ext_resource type="Texture2D" uid="uid://csvhjwr7qo4pv" path="res://media/kaisouko_default_parry.png" id="1_i71mh"]
+[ext_resource type="Texture2D" uid="uid://u6c5nspjedyl" path="res://media/kaisouko_skeleton/kaisouko_texture.png" id="2_1152e"]
 [ext_resource type="Script" path="res://scripts/waifu.gd" id="2_t4d78"]
+
+[sub_resource type="Animation" id="Animation_baj5j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("polygons/Skeleton2D/body/left_arm:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_rtt27"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_2pftr"]
+resource_name = "test"
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_3b5gd"]
+resource_name = "wave"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("polygons/Skeleton2D/body/left_arm:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.314159]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8vnws"]
+_data = {
+"RESET": SubResource("Animation_baj5j"),
+"idle": SubResource("Animation_rtt27"),
+"test": SubResource("Animation_2pftr"),
+"wave": SubResource("Animation_3b5gd")
+}
 
 [node name="Waifu" type="Node2D"]
 script = ExtResource("2_t4d78")
 
-[node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_i71mh")
+[node name="polygons" type="Node2D" parent="."]
+position = Vector2(-188, -254)
 
-[node name="gon" type="Polygon2D" parent="."]
+[node name="left_arm" type="Polygon2D" parent="polygons"]
+position = Vector2(-149, -5)
+texture = ExtResource("2_1152e")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(332.192, 152.74, 419.178, 105.479, 445.89, 108.904, 442.466, 141.096, 337.671, 200)
+uv = PackedVector2Array(332.192, 152.74, 419.178, 105.479, 445.89, 108.904, 442.466, 141.096, 337.671, 200)
+bones = ["body", PackedFloat32Array(0, 0, 0, 0, 0), "body/left_arm", PackedFloat32Array(1, 1, 1, 1, 1)]
+
+[node name="body" type="Polygon2D" parent="polygons"]
+texture = ExtResource("2_1152e")
+skeleton = NodePath("../Skeleton2D")
+polygon = PackedVector2Array(89.726, 52.7397, 151.37, 29.4521, 210.959, 52.7397, 206.849, 180.137, 210.274, 200.685, 207.534, 221.233, 232.877, 340.411, 213.699, 345.89, 199.315, 489.726, 125.342, 491.096, 95.2055, 331.507, 126.027, 262.329, 89.726, 266.438, 102.055, 213.699)
+uv = PackedVector2Array(89.726, 52.7397, 151.37, 29.4521, 210.959, 52.7397, 206.849, 180.137, 210.274, 200.685, 207.534, 221.233, 232.877, 340.411, 213.699, 345.89, 199.315, 489.726, 125.342, 491.096, 95.2055, 331.507, 126.027, 262.329, 89.726, 266.438, 102.055, 213.699)
+bones = ["body", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 1), "body/left_arm", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="polygons"]
+
+[node name="body" type="Bone2D" parent="polygons/Skeleton2D"]
+position = Vector2(171, 186)
+rest = Transform2D(1, 0, 0, 1, 171, 186)
+
+[node name="left_arm" type="Bone2D" parent="polygons/Skeleton2D/body"]
+position = Vector2(22, -18)
+scale = Vector2(1, 1)
+rest = Transform2D(1, 0, 0, 1, 22, -18)
+auto_calculate_length_and_angle = false
+length = 88.0
+bone_angle = -30.0
+
+[node name="ClickableAreaGon" type="Polygon2D" parent="."]
 color = Color(0.619608, 0.619608, 0.619608, 0)
-polygon = PackedVector2Array(-104, -216, 120, -216, 120, 248, -104, 248)
+polygon = PackedVector2Array(57, -24, 137, -184, 83, -220, 31, -181, -20, -224, -80, -213, -102, -169, -92, -40, -102, 21, -72, 21, -91, 85, -68, 191, -63, 239, 15, 238, 5, 206, 51, 79, 28, -5)
 
 [node name="MousePosLabel" type="Label" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -28,6 +105,7 @@ grow_vertical = 2
 text = "mouse_pos"
 
 [node name="PosLabel" type="Label" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -42,6 +120,7 @@ grow_vertical = 2
 text = "waifu_pos"
 
 [node name="RandomLabel" type="Label" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -54,3 +133,8 @@ offset_bottom = -105.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Random"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8vnws")
+}

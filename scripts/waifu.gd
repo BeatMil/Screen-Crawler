@@ -2,7 +2,7 @@ extends Node2D
 
 # See? I'm even commenting this for you. Hmph!
 
-@onready var _ClickPolygon: Polygon2D = $"gon"
+@onready var _ClickPolygon: Polygon2D = $"ClickableAreaGon"
 var mouse_pos: Vector2
 @onready var offset: Vector2
 
@@ -14,7 +14,10 @@ var is_following_mouse = false
 func _ready():
 	pass
 	# Enable pass through mouse thingy XD
-	get_window().mouse_passthrough_polygon = $"gon".polygon
+	get_window().mouse_passthrough_polygon = _ClickPolygon.polygon
+
+	# Set first animation
+	$AnimationPlayer.play("wave")
 
 
 func _process(_delta):
