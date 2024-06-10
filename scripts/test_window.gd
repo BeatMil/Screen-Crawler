@@ -25,7 +25,7 @@ func _ready():
 	_MainWindow.transparent_bg = true	# Make the window's background transparent
 
 	# _MainWindow.size = Vector2(220, 470)
-	_MainWindow.position = Vector2(0, 0)
+	_MainWindow.position = Vector2(0, DisplayServer.screen_get_size().y + sprite_offset.y)
 	# _MainWindow.position = Vector2(0, DisplayServer.screen_get_size().y + sprite_offset.y)
 
 	Engine.max_fps = 120 ## This stops pc lagging
