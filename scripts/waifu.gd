@@ -14,9 +14,9 @@ var is_following_mouse = false
 
 func _ready():
 	pass
-
+	#get_window().mouse_passthrough = true
 	# Enable pass through mouse thingy XD
-	get_window().mouse_passthrough_polygon = _ClickPolygon.polygon
+	#get_window().mouse_passthrough_polygon = _ClickPolygon.polygon
 
 	# Set position
 	position = Vector2(0, DisplayServer.screen_get_size().y) + sprite_offset
